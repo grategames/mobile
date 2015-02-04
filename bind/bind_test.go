@@ -14,8 +14,8 @@ import (
 	"strings"
 	"testing"
 
-	_ "golang.org/x/tools/go/gcimporter"
-	"golang.org/x/tools/go/types"
+	_ "grate/backend/tools/go/gcimporter"
+	"grate/backend/tools/go/types"
 )
 
 var updateFlag = flag.Bool("update", false, "Update the golden files.")

@@ -12,14 +12,14 @@ import (
 
 	_ "image/jpeg"
 
-	"golang.org/x/mobile/app"
-	"golang.org/x/mobile/app/debug"
-	"golang.org/x/mobile/event"
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/gl"
-	"golang.org/x/mobile/sprite"
-	"golang.org/x/mobile/sprite/clock"
-	"golang.org/x/mobile/sprite/glsprite"
+	"grate/backend/mobile/app"
+	"grate/backend/mobile/app/debug"
+	"grate/backend/mobile/event"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/gl"
+	"grate/backend/mobile/sprite"
+	"grate/backend/mobile/sprite/clock"
+	"grate/backend/mobile/sprite/glsprite"
 )
 
 var (

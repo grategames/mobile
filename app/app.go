@@ -7,7 +7,7 @@ package app
 import (
 	"io"
 
-	"golang.org/x/mobile/event"
+	"grate/backend/mobile/event"
 )
 
 // Run starts the app.

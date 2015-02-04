@@ -5,7 +5,7 @@
 // Package bind implements a code generator for gobind.
 //
 // See the documentation on the gobind command for usage details.
-package bind // import "golang.org/x/mobile/bind"
+package bind // import "grate/backend/mobile/bind"
 
 // TODO(crawshaw): slice support
 // TODO(crawshaw): channel support
@@ -16,7 +16,7 @@ import (
 	"go/token"
 	"io"
 
-	"golang.org/x/tools/go/types"
+	"grate/backend/tools/go/types"
 )
 
 // GenJava generates a Java API from a Go package.

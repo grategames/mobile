@@ -9,9 +9,9 @@ import (
 	"image"
 	"sync"
 
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/geom"
-	"golang.org/x/mobile/gl"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/geom"
+	"grate/backend/mobile/gl"
 )
 
 var glimage struct {
@@ -24,6 +24,13 @@ var glimage struct {
 	uvp           gl.Uniform
 	inUV          gl.Attrib
 	textureSample gl.Uniform
+	tintcolor 	  gl.Uniform
+}
+
+var R, G, B float32 = 1, 1, 1
+
+func Program() gl.Program {
+	return glimage.program
 }
 
 func glInit() {
@@ -40,6 +47,8 @@ func glInit() {
 	gl.BufferData(gl.ARRAY_BUFFER, gl.STATIC_DRAW, quadXYCoords)
 	gl.BindBuffer(gl.ARRAY_BUFFER, glimage.quadUV)
 	gl.BufferData(gl.ARRAY_BUFFER, gl.STATIC_DRAW, quadUVCoords)
+	
+	glimage.tintcolor = gl.GetUniformLocation(glimage.program, "tintColor")
 
 	glimage.pos = gl.GetAttribLocation(glimage.program, "pos")
 	glimage.mvp = gl.GetUniformLocation(glimage.program, "mvp")
@@ -146,12 +155,12 @@ func (img *Image) Draw(topLeft, topRight, bottomLeft geom.Point, srcBounds image
 		// First of all, convert from geom space to framebuffer space. For
 		// later convenience, we divide everything by 2 here: px2 is half of
 		// the P.X co-ordinate (in framebuffer space).
-		px2 := -0.5 + float32(topLeft.X/geom.Width)
-		py2 := +0.5 - float32(topLeft.Y/geom.Height)
-		qx2 := -0.5 + float32(topRight.X/geom.Width)
-		qy2 := +0.5 - float32(topRight.Y/geom.Height)
-		sx2 := -0.5 + float32(bottomLeft.X/geom.Width)
-		sy2 := +0.5 - float32(bottomLeft.Y/geom.Height)
+		px2 := -0.5 + float32(topLeft.X)/geom.Width.Px()
+		py2 := +0.5 - float32(topLeft.Y)/geom.Height.Px()
+		qx2 := -0.5 + float32(topRight.X)/geom.Width.Px()
+		qy2 := +0.5 - float32(topRight.Y)/geom.Height.Px()
+		sx2 := -0.5 + float32(bottomLeft.X)/geom.Width.Px()
+		sy2 := +0.5 - float32(bottomLeft.Y)/geom.Height.Px()
 		// Next, solve for the affine transformation matrix
 		//	    [ a00 a01 a02 ]
 		//	a = [ a10 a11 a12 ]
@@ -227,6 +236,8 @@ func (img *Image) Draw(topLeft, topRight, bottomLeft geom.Point, srcBounds image
 	gl.BindBuffer(gl.ARRAY_BUFFER, glimage.quadUV)
 	gl.EnableVertexAttribArray(glimage.inUV)
 	gl.VertexAttribPointer(glimage.inUV, 2, gl.FLOAT, false, 0, 0)
+	
+	gl.Uniform4f(glimage.tintcolor, R, G, B, 1)
 
 	gl.DrawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
@@ -266,7 +277,15 @@ const fragmentShader = `#version 100
 precision mediump float;
 varying vec2 UV;
 uniform sampler2D textureSample;
+
+uniform vec4 tintColor;
+
 void main(){
-	gl_FragColor = texture2D(textureSample, UV);
+	vec4 tex = texture2D(textureSample, UV);
+	if (tintColor.r != 1.0 || tintColor.g != 1.0 || tintColor.b != 1.0) {
+		gl_FragColor = tex*vec4(tintColor.r, tintColor.g, tintColor.b, tex.a);
+	} else {
+		gl_FragColor = tex;
+	}
 }
 `

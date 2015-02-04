@@ -57,7 +57,7 @@ function exits, the app exits.
 	import (
 		"log"
 
-		"golang.org/x/mobile/app"
+		"grate/backend/mobile/app"
 	)
 
 	func main() {
@@ -71,4 +71,4 @@ function exits, the app exits.
 	}
 
 */
-package app // import "golang.org/x/mobile/app"
+package app // import "grate/backend/mobile/app"

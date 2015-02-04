@@ -22,14 +22,14 @@
 //		modify the scene's nodes and animations (Arranger values)
 //		e.Render(scene, t)
 //	}
-package sprite // import "golang.org/x/mobile/sprite"
+package sprite // import "grate/backend/mobile/sprite"
 
 import (
 	"image"
 	"image/draw"
 
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/sprite/clock"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/sprite/clock"
 )
 
 type Arranger interface {

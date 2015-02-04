@@ -25,8 +25,10 @@ import (
 	"runtime"
 	"sync"
 
-	"golang.org/x/mobile/event"
-	"golang.org/x/mobile/geom"
+	"grate/backend/mobile/event"
+	"grate/backend/mobile/geom"
+	"grate/backend/mobile/gl"
+	//"log"
 )
 
 var cb Callbacks
@@ -41,9 +43,11 @@ func run(callbacks Callbacks) {
 func onResize(w, h int) {
 	// TODO(nigeltao): don't assume 72 DPI. DisplayWidth / DisplayWidthMM
 	// is probably the best place to start looking.
-	geom.PixelsPerPt = 1
-	geom.Width = geom.Pt(w)
-	geom.Height = geom.Pt(h)
+	geom.PixelsPerPt = 72
+	geom.Width = geom.Pt(float32(w)/ geom.PixelsPerPt)
+	geom.Height = geom.Pt(float32(h)/ geom.PixelsPerPt)
+	gl.Viewport(0, 0, w, h);
+	//log.Printf("Width Height", geom.Width*72,  geom.Height, geom.Height*72)
 }
 
 var events struct {
@@ -56,8 +60,8 @@ func sendTouch(ty event.TouchType, x, y float32) {
 	events.pending = append(events.pending, event.Touch{
 		Type: ty,
 		Loc: geom.Point{
-			X: geom.Pt(x),
-			Y: geom.Pt(y),
+			X: geom.Pt(float32(x)/ geom.PixelsPerPt),
+			Y: geom.Pt(float32(y)/ geom.PixelsPerPt),
 		},
 	})
 	events.Unlock()
@@ -72,8 +76,15 @@ func onTouchMove(x, y float32) { sendTouch(event.TouchMove, x, y) }
 //export onTouchEnd
 func onTouchEnd(x, y float32) { sendTouch(event.TouchEnd, x, y) }
 
+var started bool
+
 //export onDraw
 func onDraw() {
+	if !started {
+		cb.Start()
+		started = true
+	}
+
 	events.Lock()
 	pending := events.pending
 	events.pending = nil

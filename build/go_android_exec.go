@@ -64,7 +64,7 @@ func main() {
 		deviceRoot = v
 	}
 
-	pkg := "golang.org/x/mobile"
+	pkg := "grate/backend/mobile"
 	if v := os.Getenv("PKG"); v != "" {
 		pkg = v
 	}

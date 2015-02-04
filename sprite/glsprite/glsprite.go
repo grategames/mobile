@@ -6,17 +6,17 @@
 //
 // Each sprite.Texture is loaded as a GL texture object and drawn
 // to the screen via an affine transform done in a simple shader.
-package glsprite // import "golang.org/x/mobile/sprite/glsprite"
+package glsprite // import "grate/backend/mobile/sprite/glsprite"
 
 import (
 	"image"
 	"image/draw"
 
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/geom"
-	"golang.org/x/mobile/gl/glutil"
-	"golang.org/x/mobile/sprite"
-	"golang.org/x/mobile/sprite/clock"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/geom"
+	"grate/backend/mobile/gl/glutil"
+	"grate/backend/mobile/sprite"
+	"grate/backend/mobile/sprite/clock"
 )
 
 type node struct {

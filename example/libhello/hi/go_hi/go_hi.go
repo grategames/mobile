@@ -5,8 +5,8 @@
 package go_hi
 
 import (
-	"golang.org/x/mobile/bind/seq"
-	"golang.org/x/mobile/example/libhello/hi"
+	"grate/backend/mobile/bind/seq"
+	"grate/backend/mobile/example/libhello/hi"
 )
 
 func proxy_Hello(out, in *seq.Buffer) {

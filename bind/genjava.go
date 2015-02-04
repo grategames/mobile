@@ -13,7 +13,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"golang.org/x/tools/go/types"
+	"grate/backend/tools/go/types"
 )
 
 // TODO(crawshaw): disallow basic android java type names in exported symbols.

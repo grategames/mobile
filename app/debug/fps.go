@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Package debug provides GL-based debugging tools for apps.
-package debug // import "golang.org/x/mobile/app/debug"
+package debug // import "grate/backend/mobile/app/debug"
 
 import (
 	"fmt"
@@ -17,8 +17,8 @@ import (
 	"time"
 
 	"code.google.com/p/freetype-go/freetype"
-	"golang.org/x/mobile/geom"
-	"golang.org/x/mobile/gl/glutil"
+	"grate/backend/mobile/geom"
+	"grate/backend/mobile/gl/glutil"
 )
 
 var lastDraw = time.Now()

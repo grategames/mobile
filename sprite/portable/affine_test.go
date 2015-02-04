@@ -14,8 +14,8 @@ import (
 	"os"
 	"testing"
 
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/geom"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/geom"
 )
 
 func TestAffine(t *testing.T) {

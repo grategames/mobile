@@ -58,7 +58,7 @@ import (
 	"runtime"
 	"unsafe"
 
-	"golang.org/x/mobile/geom"
+	"grate/backend/mobile/geom"
 )
 
 var assetManager *C.AAssetManager

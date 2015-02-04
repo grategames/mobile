@@ -9,13 +9,13 @@ import (
 	"encoding/binary"
 	"log"
 
-	"golang.org/x/mobile/app"
-	"golang.org/x/mobile/app/debug"
-	"golang.org/x/mobile/event"
-	"golang.org/x/mobile/f32"
-	"golang.org/x/mobile/geom"
-	"golang.org/x/mobile/gl"
-	"golang.org/x/mobile/gl/glutil"
+	"grate/backend/mobile/app"
+	"grate/backend/mobile/app/debug"
+	"grate/backend/mobile/event"
+	"grate/backend/mobile/f32"
+	"grate/backend/mobile/geom"
+	"grate/backend/mobile/gl"
+	"grate/backend/mobile/gl/glutil"
 )
 
 var (
@@ -45,6 +45,8 @@ func start() {
 		log.Printf("error creating GL program: %v", err)
 		return
 	}
+	
+	println("starting")
 
 	buf = gl.GenBuffer()
 	gl.BindBuffer(gl.ARRAY_BUFFER, buf)

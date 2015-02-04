@@ -9,10 +9,10 @@
 package main
 
 import (
-	"golang.org/x/mobile/app"
+	"grate/backend/mobile/app"
 
-	_ "golang.org/x/mobile/bind/java"
-	_ "golang.org/x/mobile/example/libhello/hi/go_hi"
+	_ "grate/backend/mobile/bind/java"
+	_ "grate/backend/mobile/example/libhello/hi/go_hi"
 )
 
 func main() {
